@@ -20,9 +20,14 @@ hexo.extend.injector.register('head_end', `<style type="text/css">
     .article-entry .side aside {
         display: block;
         position: relative;
+        text-align: left;
         font-size: 80%;
-        text-align: right;
-        /*background-image: linear-gradient(225deg, red, red 10px, transparent 10px, transparent);*/
+        & pre {
+        font-size: 80%;
+        }
+        & div *:only-child{
+          text-align: center;
+        }
     }
     .article-entry .side{
         display: block;
@@ -30,17 +35,12 @@ hexo.extend.injector.register('head_end', `<style type="text/css">
         padding: 1px;
         float: left;
         position: relative;
-        font-size: 80%;
         width: 19vw;
-        margin-left: -23vw;
+        margin-left: -21vw;
         transform: translateY(-50%); 
         overflow: hidden;
     }
 
-}
-
-.article-entry aside  {
-    
 }
 
 .side{
@@ -78,7 +78,7 @@ aside::before, aside::after {
   z-index: -1;
   transition: 1s;
   display: block;
-    text-align: center; 
+  text-align: center; 
   content: '';
 }
 
@@ -98,7 +98,7 @@ aside::before {
 
 aside::after {
   width: 200%;
-  height: 90%;
+  height: 75%;
 }
 
 aside:hover,
@@ -127,34 +127,32 @@ aside.hover::after{
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 
-  var selection = document.querySelector('.sidenote-mark') !== null;
-  if( selection ){
-    document.querySelector('.sidenote-mark').addEventListener('mouseover', function(event) {
-        id = event.target.id.match(/\\d+/)[0];
-        const target = document.querySelector(\`#note-\${id}\`);
-        target.classList.add('hover');
-    });
+  var selection = document.querySelectorAll('.sidenote-mark');
+  selection.forEach( ele => ele.addEventListener('mouseover', function(event) {
+      id = event.target.id.match(/\\d+/)[0];
+      const target = document.querySelector(\`#note-\${id}\`);
+      target.classList.add('hover');
+  }));
 
-    document.querySelector('.sidenote-mark').addEventListener('mouseout', function(event) {
-        id = event.target.id.match(/\\d+/)[0];
-        const target = document.querySelector(\`#note-\${id}\`);
-        target.classList.remove('hover');
-    });
-  }
-  selection = document.querySelector('aside') !== null;
-  if(selection){
-    document.querySelector('aside').addEventListener('mouseover', function(event) {
-        id = event.target.closest('aside').id.match(/\\d+/)[0];
-        const target = document.querySelector(\`#mark-\${id}\`);
-        target.classList.add('hover');
-    });
+  selection.forEach( ele => ele.addEventListener('mouseout', function(event) {
+      id = event.target.id.match(/\\d+/)[0];
+      const target = document.querySelector(\`#note-\${id}\`);
+      target.classList.remove('hover');
+  }));
 
-        document.querySelector('aside').addEventListener('mouseout', function(event) {
-        id = event.target.closest('aside').id.match(/\\d+/)[0];
-        const target = document.querySelector(\`#mark-\${id}\`);
-        target.classList.remove('hover');
-    });
-  }
+  selection = document.querySelectorAll('aside');
+  selection.forEach( ele => ele.addEventListener('mouseover', function(event) {
+    id = event.target.closest('aside').id.match(/\\d+/)[0];
+    const target = document.querySelector(\`#mark-\${id}\`);
+    target.classList.add('hover');
+  }));
+
+  selection.forEach( ele => ele.addEventListener('mouseout', function(event) {
+      id = event.target.closest('aside').id.match(/\\d+/)[0];
+      const target = document.querySelector(\`#mark-\${id}\`);
+      target.classList.remove('hover');
+  }));
+
 });
 </script>`, 'post')
     
