@@ -64,6 +64,11 @@ aside {
     display: flex;
     background: #181818;
     font-size: 80%;
+    width: auto;
+    & *{
+     width: auto;
+     max-width: 100%;
+    }
     p{
         word-break: break-all;
     }
