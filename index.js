@@ -49,6 +49,7 @@ hexo.extend.injector.register('head_end', `<style type="text/css">
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    margin-top: 2vw;
 }
 
 aside {
